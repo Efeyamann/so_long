@@ -14,12 +14,17 @@
 
 int	main(int argc, char *argv[])
 {
+	t_map	*map;
+
 	if (argc == 2)
 	{
 		xpm_control0();
 		xpm_control1();
 		ber_control(argv[1]);
 		file_control(argv[1]);
+		map = read_map(argv[1]);
+		map_control(map);
 	}
 	return (0);
 }
+
