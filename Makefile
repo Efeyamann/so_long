@@ -10,7 +10,15 @@ LIBFT = $(LIBFT_PATH)/libft.a
 PRINTF = $(PRINTF_PATH)/libftprintf.a
 MLX = libs/minilibx-linux/libmlx.a -lXext -lX11 -lm -lz
 
-SRC = main.c
+SRC_DIR = src
+MAP_OPERATIONS_DIR = src/map_operations
+
+SRC =	$(SRC_DIR)/main.c \
+		$(MAP_OPERATIONS_DIR)/map_control.c \
+		$(MAP_OPERATIONS_DIR)/map_control2.c \
+		$(MAP_OPERATIONS_DIR)/read_map.c \
+		$(MAP_OPERATIONS_DIR)/xpm_and_ber_check.c \
+
 OBJ = $(SRC:.c=.o)
 
 INCLUDES = -I includes -I $(MLX_PATH) -I $(LIBFT_PATH) -I $(PRINTF_PATH)

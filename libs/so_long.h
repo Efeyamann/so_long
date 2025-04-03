@@ -64,11 +64,14 @@ typedef struct s_game
     t_collectible  *collectibles;
 } t_game;
 
-
 void	xpm_control0(void);
 void	xpm_control1(void);
 void	ber_control(char *path);
 void	file_control(char *path);
 char    *read_map(char *filename);
+void    map_control(t_map *map);
+void    check_valid_characters(t_map *map);
+void    check_player_exit(t_map *map);
+void    check_collectibles(t_map *map);
 
 #endif
