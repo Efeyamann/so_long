@@ -6,22 +6,20 @@
 /*   By: heret <heret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 02:37:42 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/04 19:39:58 by heret            ###   ########.fr       */
+/*   Updated: 2025/04/04 21:02:11 by heret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	check_player_exit(t_map *map)
+void	check_player(t_map *map)
 {
 	size_t	i;
 	size_t	j;
 	int		player_count;
-	int		exit_count;
 
 	i = 0;
 	player_count = 0;
-	exit_count = 0;
 	while (i < map->height)
 	{
 		j = 0;
@@ -29,8 +27,6 @@ void	check_player_exit(t_map *map)
 		{
 			if (map->grid[i][j] == 'P')
 				player_count++;
-			else if (map->grid[i][j] == 'E')
-				exit_count++;
 			j++;
 		}
 		i++;
@@ -39,6 +35,27 @@ void	check_player_exit(t_map *map)
 	{
 		write(1, "Map must contain exactly one player ('P')\n", 41);
 		exit(1);
+	}
+}
+
+void	check_exit(t_map *map)
+{
+	size_t	i;
+	size_t	j;
+	int		exit_count;
+
+	i = 0;
+	exit_count = 0;
+	while (i < map->height)
+	{
+		j = 0;
+		while (j < map->width)
+		{
+			if (map->grid[i][j] == 'E')
+				exit_count++;
+			j++;
+		}
+		i++;
 	}
 	if (exit_count != 1)
 	{

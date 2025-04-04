@@ -6,7 +6,7 @@
 /*   By: heret <heret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 02:13:11 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/04 19:37:36 by heret            ###   ########.fr       */
+/*   Updated: 2025/04/04 21:15:59 by heret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,10 @@ void	map_control(t_map *map)
 	check_border_h(map);
 	check_rectangle(map);
 	check_valid_characters(map);
-	check_player_exit(map);
+	check_exit(map);
+	check_player(map);
 	check_collectibles(map);
+	find_exit(map);
+	find_player(map);
+	is_reachable(map);
 }
