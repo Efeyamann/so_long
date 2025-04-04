@@ -6,7 +6,7 @@
 /*   By: heret <heret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 02:37:42 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/04 21:02:11 by heret            ###   ########.fr       */
+/*   Updated: 2025/04/05 01:17:34 by heret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	check_collectibles(t_map *map)
 		write(1, "Map must contain at least one collectible ('C')\n", 46);
 		exit(1);
 	}
+	map->collectible_count = collectibles_count;
 }
 
 static int	is_valid_char(char c)

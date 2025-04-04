@@ -6,7 +6,7 @@
 /*   By: heret <heret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 20:58:35 by heret             #+#    #+#             */
-/*   Updated: 2025/04/04 21:42:10 by heret            ###   ########.fr       */
+/*   Updated: 2025/04/05 01:32:58 by heret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,37 +33,8 @@ typedef struct s_map
 	int		exit_y;
 	int		collectible_count;
 	int		collected;
+	int		**collectibles;
 }	t_map;
-
-typedef struct s_player
-{
-	int		x;
-	int		y;
-	int		collected;
-	t_map	*map;
-}	t_player;
-
-typedef struct s_collectible
-{
-	int		x;
-	int		y;
-	bool	collected;
-}	t_collectible;
-
-typedef struct s_exit
-{
-	int		x;
-	int		y;
-	bool	is_open;
-}	t_exit;
-
-typedef struct s_game
-{
-	t_map			map;
-	t_player		player;
-	t_exit			exit;
-	t_collectible	*collectibles;
-}	t_game;
 
 void	xpm_control0(void);
 void	xpm_control1(void);
@@ -77,6 +48,8 @@ void	check_exit(t_map *map);
 void	check_collectibles(t_map *map);
 void	find_exit(t_map *map);
 void	find_player(t_map *map);
+void	find_collectiables(t_map *map);
 void	is_reachable(t_map *map);
+void	flood_fill(char **grid, int x, int y, int size[2]);
 
 #endif

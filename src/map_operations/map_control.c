@@ -6,7 +6,7 @@
 /*   By: heret <heret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 02:13:11 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/04 21:46:15 by heret            ###   ########.fr       */
+/*   Updated: 2025/04/05 01:15:40 by heret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,6 @@ void	map_control(t_map *map)
 	check_collectibles(map);
 	find_exit(map);
 	find_player(map);
+	find_collectiables(map);
 	is_reachable(map);
 }

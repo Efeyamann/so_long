@@ -6,7 +6,7 @@
 /*   By: heret <heret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 13:59:54 by heret             #+#    #+#             */
-/*   Updated: 2025/04/04 19:17:04 by heret            ###   ########.fr       */
+/*   Updated: 2025/04/05 01:11:26 by heret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	xpm_control0(void)
 	int	fd_char;
 	int	fd_exit;
 	int	fd_background;
-
 
 	fd_char = open("assets/char.xpm", O_RDWR);
 	fd_exit = open("assets/exit.xpm", O_RDWR);

@@ -6,12 +6,24 @@
 /*   By: heret <heret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 23:50:06 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/04 19:35:32 by heret            ###   ########.fr       */
+/*   Updated: 2025/04/05 01:32:51 by heret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "fcntl.h"
+
+void	flood_fill(char **grid, int x, int y, int size[2])
+{
+	if (x < 0 || y < 0 || x >= size[0] || y >= size[1]
+		|| grid[y][x] == '1' || grid[y][x] == 'V')
+		return ;
+	grid[y][x] = 'V';
+	flood_fill(grid, x + 1, y, size);
+	flood_fill(grid, x - 1, y, size);
+	flood_fill(grid, x, y + 1, size);
+	flood_fill(grid, x, y - 1, size);
+}
 
 static void	set_map(t_map *map, int line_count)
 {

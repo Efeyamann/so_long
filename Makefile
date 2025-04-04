@@ -16,7 +16,8 @@ MAP_OPERATIONS_DIR = src/map_operations
 
 SRC =	$(SRC_DIR)/main.c \
 		$(MAP_OPERATIONS_DIR)/map_control.c \
-		$(MAP_OPERATIONS_DIR)/map_control2.c \
+		$(MAP_OPERATIONS_DIR)/find.c \
+		$(MAP_OPERATIONS_DIR)/check.c \
 		$(MAP_OPERATIONS_DIR)/read_map.c \
 		$(MAP_OPERATIONS_DIR)/xpm_and_ber_check.c \
 		$(MAP_OPERATIONS_DIR)/is_reachable.c
