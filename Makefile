@@ -19,6 +19,7 @@ SRC =	$(SRC_DIR)/main.c \
 		$(MAP_OPERATIONS_DIR)/map_control2.c \
 		$(MAP_OPERATIONS_DIR)/read_map.c \
 		$(MAP_OPERATIONS_DIR)/xpm_and_ber_check.c \
+		$(MAP_OPERATIONS_DIR)/is_reachable.c
 
 GNL_SRC = $(GNL_PATH)/get_next_line.c $(GNL_PATH)/get_next_line_utils.c
 GNL_OBJ = $(GNL_SRC:.c=.o)
