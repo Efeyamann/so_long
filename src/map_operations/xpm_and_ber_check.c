@@ -6,11 +6,11 @@
 /*   By: heret <heret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 13:59:54 by heret             #+#    #+#             */
-/*   Updated: 2025/04/03 14:24:47 by heret            ###   ########.fr       */
+/*   Updated: 2025/04/04 19:17:04 by heret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libs/so_long.h"
+#include "so_long.h"
 #include "fcntl.h"
 #include <unistd.h>
 
@@ -21,19 +21,19 @@ void	xpm_control0(void)
 	int	fd_background;
 
 
-	fd_char = open("/assets/char.xpm", O_RDWR);
-	fd_exit = open("/assets/exit.xpm", O_RDWR);
-	fd_background = open("/assets/background.xpm", O_RDWR);
+	fd_char = open("assets/char.xpm", O_RDWR);
+	fd_exit = open("assets/exit.xpm", O_RDWR);
+	fd_background = open("assets/background.xpm", O_RDWR);
 	if (fd_char <= 0 || fd_exit <= 0 || fd_background <= 0)
 	{
 		write(1, "Missing assets!\n", 16);
 		close(fd_char);
-		clsoe(fd_exit);
+		close(fd_exit);
 		close(fd_background);
 		exit(1);
 	}
 	close(fd_char);
-	clsoe(fd_exit);
+	close(fd_exit);
 	close(fd_background);
 }
 
@@ -42,8 +42,8 @@ void	xpm_control1(void)
 	int	fd_collect;
 	int	fd_wall;
 
-	fd_collect = open("/assets/collect.xpm", O_RDWR);
-	fd_wall = open("/assets/wall.xpm", O_RDWR);
+	fd_collect = open("assets/collect.xpm", O_RDWR);
+	fd_wall = open("assets/wall.xpm", O_RDWR);
 	if (fd_collect <= 0 || fd_wall <= 0)
 	{
 		write(1, "Missing assets!\n", 16);

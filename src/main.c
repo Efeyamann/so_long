@@ -6,11 +6,11 @@
 /*   By: heret <heret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 21:11:55 by heret             #+#    #+#             */
-/*   Updated: 2025/04/03 14:22:26 by heret            ###   ########.fr       */
+/*   Updated: 2025/04/04 19:18:50 by heret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libs/so_long.h"
+#include "so_long.h"
 
 int	main(int argc, char *argv[])
 {
@@ -27,4 +27,3 @@ int	main(int argc, char *argv[])
 	}
 	return (0);
 }
-

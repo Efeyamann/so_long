@@ -5,6 +5,7 @@ CFLAGS = -Wall -Wextra -Werror
 LIBFT_PATH = libs/libft
 PRINTF_PATH = libs/ft_printf
 MLX_PATH = libs/minilibx-linux
+GNL_PATH = libs/get_next_line
 
 LIBFT = $(LIBFT_PATH)/libft.a
 PRINTF = $(PRINTF_PATH)/libftprintf.a
@@ -19,9 +20,12 @@ SRC =	$(SRC_DIR)/main.c \
 		$(MAP_OPERATIONS_DIR)/read_map.c \
 		$(MAP_OPERATIONS_DIR)/xpm_and_ber_check.c \
 
-OBJ = $(SRC:.c=.o)
+GNL_SRC = $(GNL_PATH)/get_next_line.c $(GNL_PATH)/get_next_line_utils.c
+GNL_OBJ = $(GNL_SRC:.c=.o)
 
-INCLUDES = -I includes -I $(MLX_PATH) -I $(LIBFT_PATH) -I $(PRINTF_PATH)
+OBJ = $(SRC:.c=.o) $(GNL_OBJ)
+
+INCLUDES = -I libs -I $(MLX_PATH) -I $(LIBFT_PATH) -I $(PRINTF_PATH) -I $(GNL_PATH)
 
 all: $(LIBFT) $(PRINTF) $(MLX) $(NAME)
 
@@ -53,5 +57,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re $(LIBFT) $(PRINTF)
-
-
