@@ -6,7 +6,7 @@
 /*   By: heret <heret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 20:58:35 by heret             #+#    #+#             */
-/*   Updated: 2025/04/05 01:32:58 by heret            ###   ########.fr       */
+/*   Updated: 2025/04/05 04:32:40 by heret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@
 # include "stdio.h"
 
 # define MAX_MAP_SIZE 1024
+# define TILE_SIZE 32
+# define KEY_W 119
+# define KEY_S 115
+# define KEY_A 97
+# define KEY_D 100
+# define KEY_ESC 65307
+
 
 typedef struct s_map
 {
@@ -36,11 +43,24 @@ typedef struct s_map
 	int		**collectibles;
 }	t_map;
 
+typedef struct s_game
+{
+	void	*mlx;
+	void	*win;
+	t_map	*map;
+	int		move_count;
+	void	*img_player;
+	void	*img_wall;
+	void	*img_floor;
+	void	*img_exit;
+	void	*img_collectible;
+}	t_game;
+
+t_map	*read_map(char *filename);
 void	xpm_control0(void);
 void	xpm_control1(void);
 void	ber_control(char *path);
 void	file_control(char *path);
-t_map	*read_map(char *filename);
 void	map_control(t_map *map);
 void	check_valid_characters(t_map *map);
 void	check_player(t_map *map);
@@ -51,5 +71,10 @@ void	find_player(t_map *map);
 void	find_collectiables(t_map *map);
 void	is_reachable(t_map *map);
 void	flood_fill(char **grid, int x, int y, int size[2]);
+void	init_game(t_game *game);
+void	render_map(t_game *game);
+int		move_player(int keycode, t_game *game);
+int		close_window(t_game *game);
+void	exit_game(t_game *game);
 
 #endif

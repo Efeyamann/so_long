@@ -15,6 +15,8 @@ SRC_DIR = src
 MAP_OPERATIONS_DIR = src/map_operations
 
 SRC =	$(SRC_DIR)/main.c \
+		$(SRC_DIR)/game.c \
+		$(SRC_DIR)/free.c \
 		$(MAP_OPERATIONS_DIR)/map_control.c \
 		$(MAP_OPERATIONS_DIR)/find.c \
 		$(MAP_OPERATIONS_DIR)/check.c \
