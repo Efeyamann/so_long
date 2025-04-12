@@ -6,7 +6,7 @@
 /*   By: esir <esir@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 01:55:10 by heret             #+#    #+#             */
-/*   Updated: 2025/04/12 16:13:12 by esir             ###   ########.fr       */
+/*   Updated: 2025/04/12 17:32:48 by esir             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	init_game(t_game *game)
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		exit_game(game);
+	game->move_count = 0;
 	width = game->map->width * TILE_SIZE;
 	height = game->map->height * TILE_SIZE;
 	game->win = mlx_new_window(game->mlx, width, height, "so_long");

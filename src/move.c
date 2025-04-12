@@ -6,7 +6,7 @@
 /*   By: esir <esir@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 16:12:56 by esir              #+#    #+#             */
-/*   Updated: 2025/04/12 16:15:16 by esir             ###   ########.fr       */
+/*   Updated: 2025/04/12 17:44:01 by esir             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,12 @@ int	move_player(int keycode, t_game *game)
 	size_t	new_y;
 
 	move_p_logic(keycode, game, &new_x, &new_y);
+	if ((int)new_x == game->map->player_x && (int)new_y == game->map->player_y)
+		return (0);
 	if (!handle_exit_collectibles(game, new_x, new_y))
 		return (0);
+	game->move_count++;
+	ft_printf("Move count: %d\n", game->move_count);
 	game->map->grid[game->map->player_y][game->map->player_x] = '0';
 	game->map->player_x = new_x;
 	game->map->player_y = new_y;
