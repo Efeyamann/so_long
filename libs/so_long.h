@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: heret <heret@student.42.fr>                +#+  +:+       +#+        */
+/*   By: esir <esir@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 20:58:35 by heret             #+#    #+#             */
-/*   Updated: 2025/04/05 04:32:40 by heret            ###   ########.fr       */
+/*   Updated: 2025/04/12 16:58:56 by esir             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 # define KEY_D 100
 # define KEY_ESC 65307
 
-
 typedef struct s_map
 {
 	char	**grid;
@@ -39,6 +38,7 @@ typedef struct s_map
 	int		exit_x;
 	int		exit_y;
 	int		collectible_count;
+	int		original_collectible_count;
 	int		collected;
 	int		**collectibles;
 }	t_map;

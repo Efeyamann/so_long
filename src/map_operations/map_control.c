@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   map_control.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: heret <heret@student.42.fr>                +#+  +:+       +#+        */
+/*   By: esir <esir@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 02:13:11 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/05 01:15:40 by heret            ###   ########.fr       */
+/*   Updated: 2025/04/12 16:08:41 by esir             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "unistd.h"
 
-static void	check_rectangle(t_map *map)
+static void	check_row_lengths(t_map *map)
 {
 	size_t	i;
-	size_t	j;
 
 	i = 0;
 	while (i < map->height)
@@ -28,6 +27,13 @@ static void	check_rectangle(t_map *map)
 		}
 		i++;
 	}
+}
+
+static void	check_column_lengths(t_map *map)
+{
+	size_t	i;
+	size_t	j;
+
 	i = 0;
 	while (i < map->width)
 	{
@@ -100,7 +106,8 @@ void	map_control(t_map *map)
 {
 	check_border_w(map);
 	check_border_h(map);
-	check_rectangle(map);
+	check_row_lengths(map);
+	check_column_lengths(map);
 	check_valid_characters(map);
 	check_exit(map);
 	check_player(map);

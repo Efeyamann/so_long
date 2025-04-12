@@ -1,5 +1,5 @@
 NAME = so_long
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 LIBFT_PATH = libs/libft
@@ -17,6 +17,7 @@ MAP_OPERATIONS_DIR = src/map_operations
 SRC =	$(SRC_DIR)/main.c \
 		$(SRC_DIR)/game.c \
 		$(SRC_DIR)/free.c \
+		$(SRC_DIR)/move.c \
 		$(MAP_OPERATIONS_DIR)/map_control.c \
 		$(MAP_OPERATIONS_DIR)/find.c \
 		$(MAP_OPERATIONS_DIR)/check.c \

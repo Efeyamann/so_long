@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: heret <heret@student.42.fr>                +#+  +:+       +#+        */
+/*   By: esir <esir@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 01:16:09 by heret             #+#    #+#             */
-/*   Updated: 2025/04/05 04:42:59 by heret            ###   ########.fr       */
+/*   Updated: 2025/04/12 17:07:14 by esir             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,14 @@ void	find_player(t_map *map)
 	}
 }
 
+static void	allocate_collectibles(t_map *map)
+{
+	map->collectibles = malloc(sizeof(int *) * map->collectible_count);
+	if (!map->collectibles)
+		return ;
+	map->original_collectible_count = map->collectible_count;
+}
+
 void	find_collectiables(t_map *map)
 {
 	size_t	i;
@@ -66,7 +74,7 @@ void	find_collectiables(t_map *map)
 
 	i = 0;
 	collectible_index = 0;
-	map->collectibles = malloc(sizeof(int *) * map->collectible_count);
+	allocate_collectibles(map);
 	if (!map->collectibles)
 		return ;
 	while (i < map->height)
@@ -85,4 +93,10 @@ void	find_collectiables(t_map *map)
 		}
 		i++;
 	}
+}
+
+int	close_window(t_game *game)
+{
+	mlx_destroy_window(game->mlx, game->win);
+	exit(0);
 }

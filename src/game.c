@@ -3,70 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: heret <heret@student.42.fr>                +#+  +:+       +#+        */
+/*   By: esir <esir@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 01:55:10 by heret             #+#    #+#             */
-/*   Updated: 2025/04/05 04:58:27 by heret            ###   ########.fr       */
+/*   Updated: 2025/04/12 16:13:12 by esir             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	close_window(t_game *game)
-{
-	mlx_destroy_window(game->mlx, game->win);
-	exit(0);
-}
-
-int	move_player(int keycode, t_game *game)
-{
-	size_t	x;
-	size_t	y;
-	size_t	new_x;
-	size_t	new_y;
-
-	x = game->map->player_x;
-	y = game->map->player_y;
-	new_x = x;
-	new_y = y;
-	if (keycode == KEY_W && y > 0 && game->map->grid[y - 1][x] != '1')
-		new_y--;
-	else if (keycode == KEY_S && y < game->map->height - 1
-		&& game->map->grid[y + 1][x] != '1')
-		new_y++;
-	else if (keycode == KEY_A && x > 0 && game->map->grid[y][x - 1] != '1')
-		new_x--;
-	else if (keycode == KEY_D && x < game->map->width - 1
-		&& game->map->grid[y][x + 1] != '1')
-		new_x++;
-	if (game->map->grid[new_y][new_x] == 'E')
-	{
-		if (game->map->collectible_count == 0)
-		{
-			ft_printf("You collected all items! Exiting...\n");
-			ft_printf("Calling exit_game...\n");
-			exit_game(game);
-		}
-		else
-		{
-			ft_printf("You need to collect all items first!\n");
-			return (0);
-		}
-	}
-	if (game->map->grid[new_y][new_x] == 'C')
-	{
-		game->map->collectible_count--;
-	}
-	game->map->grid[y][x] = '0';
-	game->map->player_x = new_x;
-	game->map->player_y = new_y;
-	game->map->grid[new_y][new_x] = 'P';
-	mlx_clear_window(game->mlx, game->win);
-	render_map(game);
-	if (keycode == KEY_ESC)
-		exit_game(game);
-	return (0);
-}
 
 static void	render_tile(t_game *game, void *img, int x, int y)
 {

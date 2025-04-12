@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: heret <heret@student.42.fr>                +#+  +:+       +#+        */
+/*   By: esir <esir@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 23:50:06 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/05 01:32:51 by heret            ###   ########.fr       */
+/*   Updated: 2025/04/12 16:16:50 by esir             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,30 +41,37 @@ static void	set_map(t_map *map, int line_count)
 	map->exit_y = -1;
 }
 
+static char	*trim_newline(char *line)
+{
+	char	*newline;
+
+	newline = ft_strchr(line, '\n');
+	if (newline)
+		*newline = '\0';
+	return (line);
+}
+
 t_map	*read_map(char *filename)
 {
 	t_map	*map;
 	int		fd;
 	char	*line;
 	int		i;
-	char	*newline;
 
 	i = 0;
 	fd = open(filename, O_RDONLY);
 	map = malloc(sizeof(t_map));
-	if (!map)
-		return (NULL);
-	if (fd < 0)
+	if (!map || fd < 0)
 		return (NULL);
 	map->grid = malloc(sizeof(char *) * (MAX_MAP_SIZE + 1));
 	if (!map->grid)
 		return (free(map), NULL);
-	while ((line = get_next_line(fd)) && i < MAX_MAP_SIZE)
+	while (i < MAX_MAP_SIZE)
 	{
-		newline = ft_strchr(line, '\n');
-		if (newline)
-			*newline = '\0';
-		map->grid[i] = line;
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		map->grid[i] = trim_newline(line);
 		i++;
 	}
 	set_map(map, i);

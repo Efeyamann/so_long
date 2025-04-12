@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_reachable.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: heret <heret@student.42.fr>                +#+  +:+       +#+        */
+/*   By: esir <esir@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 20:59:06 by heret             #+#    #+#             */
-/*   Updated: 2025/04/05 01:33:13 by heret            ###   ########.fr       */
+/*   Updated: 2025/04/12 16:05:06 by esir             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,9 @@ static char	**get_flood_filled_map(t_map *map)
 	map_clone = clone_map(map);
 	if (!map_clone)
 		return (NULL);
-
 	size[0] = map->width;
 	size[1] = map->height;
-
 	flood_fill(map_clone, map->player_x, map->player_y, size);
-
 	return (map_clone);
 }
 
