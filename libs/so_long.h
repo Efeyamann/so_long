@@ -6,7 +6,7 @@
 /*   By: esir <esir@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 20:58:35 by heret             #+#    #+#             */
-/*   Updated: 2025/04/12 17:30:01 by esir             ###   ########.fr       */
+/*   Updated: 2025/04/13 15:12:20 by esir             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include "stdbool.h"
 # include "stdio.h"
 
-# define MAX_MAP_SIZE 1024
 # define TILE_SIZE 32
 # define KEY_W 119
 # define KEY_S 115
@@ -62,10 +61,12 @@ void	xpm_control1(void);
 void	ber_control(char *path);
 void	file_control(char *path);
 void	map_control(t_map *map);
+void	free_map_resources(t_map *map, int i);
 void	check_valid_characters(t_map *map);
 void	check_player(t_map *map);
 void	check_exit(t_map *map);
 void	check_collectibles(t_map *map);
+void	set_map(t_map *map, int line_count);
 void	find_exit(t_map *map);
 void	find_player(t_map *map);
 void	find_collectiables(t_map *map);
@@ -76,5 +77,6 @@ void	render_map(t_game *game);
 int		move_player(int keycode, t_game *game);
 int		close_window(t_game *game);
 void	exit_game(t_game *game);
+char	*trim_newline(char *line);
 
 #endif

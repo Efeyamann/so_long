@@ -6,11 +6,23 @@
 /*   By: esir <esir@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 16:12:56 by esir              #+#    #+#             */
-/*   Updated: 2025/04/12 17:44:01 by esir             ###   ########.fr       */
+/*   Updated: 2025/04/13 15:06:17 by esir             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	flood_fill(char **grid, int x, int y, int size[2])
+{
+	if (x < 0 || y < 0 || x >= size[0] || y >= size[1]
+		|| grid[y][x] == '1' || grid[y][x] == 'V')
+		return ;
+	grid[y][x] = 'V';
+	flood_fill(grid, x + 1, y, size);
+	flood_fill(grid, x - 1, y, size);
+	flood_fill(grid, x, y + 1, size);
+	flood_fill(grid, x, y - 1, size);
+}
 
 static int	handle_exit_collectibles(t_game *game, size_t new_x, size_t new_y)
 {
@@ -61,6 +73,8 @@ int	move_player(int keycode, t_game *game)
 	size_t	new_x;
 	size_t	new_y;
 
+	if (keycode == KEY_ESC)
+		exit_game(game);
 	move_p_logic(keycode, game, &new_x, &new_y);
 	if ((int)new_x == game->map->player_x && (int)new_y == game->map->player_y)
 		return (0);
@@ -74,7 +88,5 @@ int	move_player(int keycode, t_game *game)
 	game->map->grid[new_y][new_x] = 'P';
 	mlx_clear_window(game->mlx, game->win);
 	render_map(game);
-	if (keycode == KEY_ESC)
-		exit_game(game);
 	return (0);
 }

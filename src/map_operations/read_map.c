@@ -6,73 +6,105 @@
 /*   By: esir <esir@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 23:50:06 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/12 16:16:50 by esir             ###   ########.fr       */
+/*   Updated: 2025/04/13 15:14:23 by esir             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "fcntl.h"
 
-void	flood_fill(char **grid, int x, int y, int size[2])
+static int	open_file(char *filename, int *fd)
 {
-	if (x < 0 || y < 0 || x >= size[0] || y >= size[1]
-		|| grid[y][x] == '1' || grid[y][x] == 'V')
-		return ;
-	grid[y][x] = 'V';
-	flood_fill(grid, x + 1, y, size);
-	flood_fill(grid, x - 1, y, size);
-	flood_fill(grid, x, y + 1, size);
-	flood_fill(grid, x, y - 1, size);
+	*fd = open(filename, O_RDONLY);
+	if (*fd < 0)
+		return (0);
+	return (1);
 }
 
-static void	set_map(t_map *map, int line_count)
+static t_map	*allocate_map(void)
 {
-	map->grid[line_count] = NULL;
-	map->height = line_count;
-	if (line_count > 0)
-		map->width = ft_strlen(map->grid[0]);
-	else
-		map->width = 0;
-	map->collectible_count = 0;
-	map->collected = 0;
-	map->player_x = -1;
-	map->player_y = -1;
-	map->exit_x = -1;
-	map->exit_y = -1;
+	t_map	*map;
+
+	map = malloc(sizeof(t_map));
+	if (!map)
+		return (NULL);
+	map->grid = malloc(sizeof(char *) * 8);
+	if (!map->grid)
+	{
+		free(map);
+		return (NULL);
+	}
+	return (map);
 }
 
-static char	*trim_newline(char *line)
+static char	**resize_grid(char **old_grid, int old_size, int new_size)
 {
-	char	*newline;
+	char	**new_grid;
+	int		i;
 
-	newline = ft_strchr(line, '\n');
-	if (newline)
-		*newline = '\0';
-	return (line);
+	new_grid = malloc(sizeof(char *) * new_size);
+	if (!new_grid)
+	{
+		i = 0;
+		while (i < old_size)
+		{
+			free(old_grid[i]);
+			i++;
+		}
+		free(old_grid);
+		return (NULL);
+	}
+	i = 0;
+	while (i < old_size)
+	{
+		new_grid[i] = old_grid[i];
+		i++;
+	}
+	free(old_grid);
+	return (new_grid);
+}
+
+static int	read_and_store_lines(int fd, t_map *map, int *i, int *capacity)
+{
+	char	*line;
+
+	while ((line = get_next_line(fd)))
+	{
+		if (*i >= *capacity)
+		{
+			*capacity *= 2;
+			map->grid = resize_grid(map->grid, *i, *capacity);
+			if (!map->grid)
+				return (0);
+		}
+		map->grid[(*i)++] = trim_newline(line);
+	}
+	map->grid[*i] = NULL;
+	return (1);
 }
 
 t_map	*read_map(char *filename)
 {
 	t_map	*map;
 	int		fd;
-	char	*line;
+	int		capacity;
 	int		i;
 
+	capacity = 8;
 	i = 0;
-	fd = open(filename, O_RDONLY);
-	map = malloc(sizeof(t_map));
-	if (!map || fd < 0)
+	if (!open_file(filename, &fd))
 		return (NULL);
-	map->grid = malloc(sizeof(char *) * (MAX_MAP_SIZE + 1));
-	if (!map->grid)
-		return (free(map), NULL);
-	while (i < MAX_MAP_SIZE)
+	map = allocate_map();
+	if (!map)
 	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		map->grid[i] = trim_newline(line);
-		i++;
+		close(fd);
+		return (NULL);
+	}
+	if (!read_and_store_lines(fd, map, &i, &capacity))
+	{
+		free_map_resources(map, i);
+		close(fd);
+		return (NULL);
 	}
 	set_map(map, i);
 	close(fd);

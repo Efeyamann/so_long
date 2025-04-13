@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xpm_and_ber_check.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: heret <heret@student.42.fr>                +#+  +:+       +#+        */
+/*   By: esir <esir@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 13:59:54 by heret             #+#    #+#             */
-/*   Updated: 2025/04/05 01:11:26 by heret            ###   ########.fr       */
+/*   Updated: 2025/04/13 15:09:16 by esir             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,16 @@ void	file_control(char *path)
 		exit(1);
 	}
 	close(fd);
+}
+
+void	free_map_resources(t_map *map, int i)
+{
+	int j = 0;
+	while (j < i)
+	{
+		free(map->grid[j]);
+		j++;
+	}
+	free(map->grid);
+	free(map);
 }
