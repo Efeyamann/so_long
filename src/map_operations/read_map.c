@@ -6,7 +6,7 @@
 /*   By: esir <esir@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 23:50:06 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/13 15:14:23 by esir             ###   ########.fr       */
+/*   Updated: 2025/04/13 16:55:18 by esir             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ static int	read_and_store_lines(int fd, t_map *map, int *i, int *capacity)
 {
 	char	*line;
 
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		if (*i >= *capacity)
 		{
@@ -78,6 +79,7 @@ static int	read_and_store_lines(int fd, t_map *map, int *i, int *capacity)
 				return (0);
 		}
 		map->grid[(*i)++] = trim_newline(line);
+		line = get_next_line(fd);
 	}
 	map->grid[*i] = NULL;
 	return (1);
