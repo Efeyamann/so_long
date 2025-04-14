@@ -6,7 +6,7 @@
 /*   By: esir <esir@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 01:16:09 by heret             #+#    #+#             */
-/*   Updated: 2025/04/12 17:07:14 by esir             ###   ########.fr       */
+/*   Updated: 2025/04/13 20:03:22 by esir             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,6 @@ void	find_collectiables(t_map *map)
 
 int	close_window(t_game *game)
 {
-	mlx_destroy_window(game->mlx, game->win);
-	exit(0);
+	exit_game(game);
+	return (0);
 }

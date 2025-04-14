@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   exit_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esir <esir@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 04:46:40 by heret             #+#    #+#             */
-/*   Updated: 2025/04/12 17:07:35 by esir             ###   ########.fr       */
+/*   Updated: 2025/04/13 20:03:08 by esir             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,10 @@ void	exit_game(t_game *game)
 {
 	if (game == NULL)
 		return ;
+	if (game->mlx != NULL)
+		mlx_loop_end(game->mlx);
 	free_game1(game);
 	free_game2(game);
 	free_game3(game);
-	if (game->mlx != NULL)
-	{
-		mlx_loop_end(game->mlx);
-	}
 	exit(1);
 }

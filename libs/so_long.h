@@ -6,7 +6,7 @@
 /*   By: esir <esir@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 20:58:35 by heret             #+#    #+#             */
-/*   Updated: 2025/04/13 16:43:17 by esir             ###   ########.fr       */
+/*   Updated: 2025/04/13 20:06:19 by esir             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	map_control(t_map *map);
 void	free_map_resources(t_map *map, int i);
 void	check_valid_characters(t_map *map);
 void	check_player(t_map *map);
+void	exit_reachable(t_map *map, char **map_clone, const char *error_msg);
 void	check_exit(t_map *map);
 void	check_collectibles(t_map *map);
 void	set_map(t_map *map, int line_count);
@@ -71,10 +72,11 @@ void	find_exit(t_map *map);
 void	find_player(t_map *map);
 void	find_collectiables(t_map *map);
 void	is_reachable(t_map *map);
-void	flood_fill(char **grid, int x, int y, int size[2]);
+void	flood_fill(char **grid, int xy[2], int size[2], int allow_exit);
 void	init_game(t_game *game);
 void	render_map(t_game *game);
 int		move_player(int keycode, t_game *game);
+void	exit_with_cleanup(t_map *map, const char *error_msg);
 int		close_window(t_game *game);
 void	exit_game(t_game *game);
 char	*trim_newline(char *line);

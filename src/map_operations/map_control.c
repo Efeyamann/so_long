@@ -6,7 +6,7 @@
 /*   By: esir <esir@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 02:13:11 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/12 16:08:41 by esir             ###   ########.fr       */
+/*   Updated: 2025/04/13 18:57:52 by esir             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ static void	check_row_lengths(t_map *map)
 	{
 		if (ft_strlen(map->grid[i]) != map->width)
 		{
-			write(1, "Map is not a rectangle\n", 23);
-			exit(1);
+			exit_with_cleanup(map, "Map is not a rectangle\n");
 		}
 		i++;
 	}
@@ -42,8 +41,7 @@ static void	check_column_lengths(t_map *map)
 		{
 			if (map->grid[j][i] == '\0')
 			{
-				write(1, "Map is not a rectangle\n", 23);
-				exit(1);
+				exit_with_cleanup(map, "Map is not a rectangle\n");
 			}
 			j++;
 		}
@@ -62,13 +60,11 @@ static void	check_border_w(t_map *map)
 	{
 		if (map->grid[i][0] != '1')
 		{
-			write(1, "Map borders are not correctly set\n", 34);
-			exit(1);
+			exit_with_cleanup(map, "Map borders are not correctly set\n");
 		}
 		if (map->grid[i][last_col] != '1')
 		{
-			write(1, "Map borders are not correctly set\n", 34);
-			exit(1);
+			exit_with_cleanup(map, "Map borders are not correctly set\n");
 		}
 		i++;
 	}
@@ -85,8 +81,7 @@ static void	check_border_h(t_map *map)
 	{
 		if (map->grid[0][i] != '1')
 		{
-			write(1, "Map borders are not correctly set\n", 34);
-			exit(1);
+			exit_with_cleanup(map, "Map borders are not correctly set\n");
 		}
 		i++;
 	}
@@ -95,8 +90,7 @@ static void	check_border_h(t_map *map)
 	{
 		if (map->grid[last_row][i] != '1')
 		{
-			write(1, "Map borders are not correctly set\n", 34);
-			exit(1);
+			exit_with_cleanup(map, "Map borders are not correctly set\n");
 		}
 		i++;
 	}

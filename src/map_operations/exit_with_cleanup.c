@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exit_with_cleanup.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esir <esir@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 21:11:55 by heret             #+#    #+#             */
-/*   Updated: 2025/04/13 18:56:37 by esir             ###   ########.fr       */
+/*   Created: 2025/04/13 18:13:41 by esir              #+#    #+#             */
+/*   Updated: 2025/04/13 18:51:22 by esir             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(int argc, char *argv[])
+static void	free_map(t_map *map)
 {
-	t_game	game;
+	size_t	i;
 
-	if (argc == 2)
+	if (!map || !map->grid)
+		return ;
+	i = 0;
+	while (i < map->height)
 	{
-		xpm_control0();
-		xpm_control1();
-		ber_control(argv[1]);
-		file_control(argv[1]);
-		game.map = read_map(argv[1]);
-		map_control(game.map);
-		init_game(&game);
-		render_map(&game);
-		mlx_key_hook(game.win, move_player, &game);
-		mlx_hook(game.win, 17, 0, close_window, &game);
-		mlx_loop(game.mlx);
+		free(map->grid[i]);
+		i++;
 	}
-	return (0);
+	free(map->grid);
+	map->grid = NULL;
+	free(map);
+}
+
+void	exit_with_cleanup(t_map *map, const char *error_msg)
+{
+	if (error_msg)
+		write(1, error_msg, ft_strlen(error_msg));
+	free_map(map);
+	exit(1);
 }

@@ -6,7 +6,7 @@
 /*   By: esir <esir@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 02:37:42 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/12 16:54:09 by esir             ###   ########.fr       */
+/*   Updated: 2025/04/13 18:24:04 by esir             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ void	check_player(t_map *map)
 	}
 	if (player_count != 1)
 	{
-		write(1, "Map must contain exactly one player ('P')\n", 41);
-		exit(1);
+		exit_with_cleanup(map, "Map must contain exactly one player ('P')\n");
 	}
 }
 
@@ -59,8 +58,7 @@ void	check_exit(t_map *map)
 	}
 	if (exit_count != 1)
 	{
-		write(1, "Map must contain exactly one exit ('E')\n", 40);
-		exit(1);
+		exit_with_cleanup(map, "Map must contain exactly one exit ('E')\n");
 	}
 }
 
@@ -85,8 +83,7 @@ void	check_collectibles(t_map *map)
 	}
 	if (collectibles_count < 1)
 	{
-		write(1, "Map must contain at least one collectible ('C')\n", 46);
-		exit(1);
+		exit_with_cleanup(map, "Map must have at least one collectible('C')\n");
 	}
 	map->collectible_count = collectibles_count;
 }
@@ -109,8 +106,7 @@ void	check_valid_characters(t_map *map)
 		{
 			if (!is_valid_char(map->grid[i][j]))
 			{
-				write(1, "Invalid character found in map\n", 31);
-				exit(1);
+				exit_with_cleanup(map, "Invalid character found in map\n");
 			}
 			j++;
 		}

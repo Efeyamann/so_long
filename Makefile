@@ -9,16 +9,18 @@ GNL_PATH = libs/get_next_line
 
 LIBFT = $(LIBFT_PATH)/libft.a
 PRINTF = $(PRINTF_PATH)/libftprintf.a
-MLX = libs/minilibx-linux/libmlx.a -lXext -lX11 -lm -lz
+MLX = $(MLX_PATH)/libmlx.a -lXext -lX11 -lm -lz
 
 SRC_DIR = src
-MAP_OPERATIONS_DIR = src/map_operations
+MAP_OPERATIONS_DIR = $(SRC_DIR)/map_operations
 
 SRC =	$(SRC_DIR)/main.c \
 		$(SRC_DIR)/game.c \
-		$(SRC_DIR)/free.c \
+		$(SRC_DIR)/exit_game.c \
 		$(SRC_DIR)/move.c \
 		$(MAP_OPERATIONS_DIR)/map_control.c \
+		$(MAP_OPERATIONS_DIR)/exit_with_cleanup.c \
+		$(MAP_OPERATIONS_DIR)/exit_reachable.c \
 		$(MAP_OPERATIONS_DIR)/find.c \
 		$(MAP_OPERATIONS_DIR)/check.c \
 		$(MAP_OPERATIONS_DIR)/read_map.c \
@@ -39,10 +41,10 @@ $(NAME): $(OBJ) $(LIBFT) $(PRINTF)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(PRINTF) $(MLX) -o $(NAME)
 
 $(LIBFT):
-	$(MAKE) -C $(LIBFT_PATH)
+	$(MAKE) -C $(LIBFT_PATH) all
 
 $(PRINTF):
-	$(MAKE) -C $(PRINTF_PATH)
+	$(MAKE) -C $(PRINTF_PATH) all
 
 $(MLX):
 	$(MAKE) -C $(MLX_PATH)
@@ -62,4 +64,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re $(LIBFT) $(PRINTF)
+.PHONY: all clean fclean re

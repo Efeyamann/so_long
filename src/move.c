@@ -6,22 +6,37 @@
 /*   By: esir <esir@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 16:12:56 by esir              #+#    #+#             */
-/*   Updated: 2025/04/13 15:06:17 by esir             ###   ########.fr       */
+/*   Updated: 2025/04/13 17:33:31 by esir             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	flood_fill(char **grid, int x, int y, int size[2])
+void	flood_fill(char **grid, int xy[2], int size[2], int allow_exit)
 {
+	int	x;
+	int	y;
+	int	next_xy[2];
+
+	x = xy[0];
+	y = xy[1];
 	if (x < 0 || y < 0 || x >= size[0] || y >= size[1]
-		|| grid[y][x] == '1' || grid[y][x] == 'V')
+		|| grid[y][x] == '1' || grid[y][x] == 'V'
+		|| (!allow_exit && grid[y][x] == 'E'))
 		return ;
 	grid[y][x] = 'V';
-	flood_fill(grid, x + 1, y, size);
-	flood_fill(grid, x - 1, y, size);
-	flood_fill(grid, x, y + 1, size);
-	flood_fill(grid, x, y - 1, size);
+	next_xy[0] = x + 1;
+	next_xy[1] = y;
+	flood_fill(grid, next_xy, size, allow_exit);
+	next_xy[0] = x - 1;
+	next_xy[1] = y;
+	flood_fill(grid, next_xy, size, allow_exit);
+	next_xy[0] = x;
+	next_xy[1] = y + 1;
+	flood_fill(grid, next_xy, size, allow_exit);
+	next_xy[0] = x;
+	next_xy[1] = y - 1;
+	flood_fill(grid, next_xy, size, allow_exit);
 }
 
 static int	handle_exit_collectibles(t_game *game, size_t new_x, size_t new_y)
